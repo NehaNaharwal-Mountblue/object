@@ -5,11 +5,18 @@ function invert(obj) {
     // Assume that all of the object's values will be unique and string serializable.
     // http://underscorejs.org/#invert
 
-    const key = Object.keys(obj);
-    const values = Object.values(obj);
+    //const key = Object.keys(obj);
+    //const values = Object.values(obj);
+
     const inverted = []
-    for ( let i = 0; i < key.length; i++) {
-        inverted[i] = [values[i],key[i]];
+    for (let key in obj) {
+        if(typeof(obj[key]) === 'obj'){
+            inverted[JSON.stringify(obj[key])] = key;
+        }
+        else{
+            const values = obj[key];
+            inverted[values] = key;
+        }
     }
     return inverted;
   }
